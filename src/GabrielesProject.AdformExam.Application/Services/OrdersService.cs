@@ -9,13 +9,11 @@ public class OrdersService : IOrdersService
 {
     private readonly IOrdersRepository _ordersRepository;
     private readonly IExternalUserService _usersService;
-    private readonly IItemsService _itemsService;
 
-    public OrdersService(IOrdersRepository ordersRepository, IExternalUserService usersService, IItemsService itemsService)
+    public OrdersService(IOrdersRepository ordersRepository, IExternalUserService usersService)
     {
         _ordersRepository = ordersRepository;
         _usersService = usersService;
-        _itemsService = itemsService;
     }
 
     public async Task<OrderDTO> AddOrder(NewOrderDTO order)
@@ -69,7 +67,7 @@ public class OrdersService : IOrdersService
         var ordersToMarkAsNotPaid = await _ordersRepository.GetUnpaidOrdersOlderThanTwoHoursAsync();
         foreach(var order in ordersToMarkAsNotPaid)
         {
-            await _ordersRepository.UpdateOrder(order.Id, "not paid");
+            await _ordersRepository.DeleteOrderAsync(order.Id);
         }
         return true;
     }
@@ -97,7 +95,9 @@ public class OrdersService : IOrdersService
         {
             Id = order.Id,
             UserId = order.UserId,
-            Status = order.Status
+            Status = order.Status,
+            ItemId = order.ItemId,
+            CreatedAt = order.CreatedAt
         };
     }
 }

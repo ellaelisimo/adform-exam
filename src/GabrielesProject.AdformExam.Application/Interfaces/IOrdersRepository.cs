@@ -10,7 +10,7 @@ public interface IOrdersRepository
 
     public Task<int> AddOrder(Order order);
 
-    public Task<int> DeleteOrderAsync(int id, string orderStatus);
+    public Task<int> DeleteOrderAsync(int id);
 
     public Task<int> UpdateOrder(int id, string orderStatus);
 
