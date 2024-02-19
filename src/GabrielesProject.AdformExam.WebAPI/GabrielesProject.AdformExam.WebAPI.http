@@ -1,0 +1,6 @@
+@GabrielesProject.AdformExam.WebAPI_HostAddress = http://localhost:5023
+
+GET {{GabrielesProject.AdformExam.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
