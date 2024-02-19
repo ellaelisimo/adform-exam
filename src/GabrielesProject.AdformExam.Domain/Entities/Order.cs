@@ -1,6 +1,6 @@
 ﻿namespace GabrielesProject.AdformExam.Domain.Entities;
 
-public class Order
+public record Order
 {
     public int Id { get; set; }
 

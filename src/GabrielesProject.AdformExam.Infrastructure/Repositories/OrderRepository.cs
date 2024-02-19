@@ -38,4 +38,11 @@ public class OrderRepository : IOrderRepository
     {
         return _connection.ExecuteAsync("UPDATE orders SET status=@orderStatus WHERE id=@id", new { id, orderStatus });
     }
+
+    public async Task<IEnumerable<Order>> GetUnpaidOrdersOlderThanTwoHoursAsync()
+    {
+        var twoHoursAgo = DateTime.UtcNow.AddHours(-2);
+        var sql = "SELECT * FROM orders WHERE status = 'not paid' AND created_at < @twoHoursAgo";
+        return await _connection.QueryAsync<Order>(sql, new { twoHoursAgo });
+    }
 }

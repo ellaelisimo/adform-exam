@@ -15,7 +15,7 @@ namespace GabrielesProject.AdformExam.Application.Services
 
         public async Task<ExternalUser> GetUserAsync(int id)
         {
-            var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users={id}");
+            var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{id}");
             var user = await response.Content.ReadAsAsync<ExternalUser>();
 
             if(response.Content is null)

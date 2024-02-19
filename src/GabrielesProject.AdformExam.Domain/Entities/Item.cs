@@ -1,6 +1,6 @@
 ﻿namespace GabrielesProject.AdformExam.Domain.Entities;
 
-public class Item
+public record Item
 {
     public int Id { get; set; }
 

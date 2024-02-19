@@ -2,7 +2,7 @@
 
 namespace GabrielesProject.AdformExam.Application.Interfaces;
 
-public interface IOrderRepository
+public interface IOrderService
 {
     public Task<IEnumerable<Order>> GetOrdersAsync();
 
@@ -10,9 +10,8 @@ public interface IOrderRepository
 
     public Task<int> AddOrder(Order order);
 
-    public Task<int> DeleteOrderAsync(int id, string orderStatus);
+    // public Task<int> DeleteOrderAsync(int id, string orderStatus);
+    public Task<bool> DeleteAsNotPaidAfterTwoHours();
 
     public Task<int> UpdateOrder(int id, string orderStatus);
-
-    public Task<IEnumerable<Order>> GetUnpaidOrdersOlderThanTwoHoursAsync();
 }

@@ -1,6 +1,6 @@
 ﻿namespace GabrielesProject.AdformExam.Domain.Entities;
 
-public class ExternalUser
+public record ExternalUser
 {
     public int Id { get; set; }
 

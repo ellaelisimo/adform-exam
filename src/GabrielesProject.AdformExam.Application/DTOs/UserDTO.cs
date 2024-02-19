@@ -1,6 +1,6 @@
 ﻿namespace GabrielesProject.AdformExam.Application.DTOs;
 
-public class UserDTO
+public record UserDTO
 {
     public int Id { get; set; }
 
