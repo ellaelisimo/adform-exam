@@ -3,5 +3,7 @@
 	id SERIAL PRIMARY KEY,
 	status VARCHAR(100) NOT NULL,
 	user_id INT,
-	created_at TIMESTAMP
+	item_id INT,
+	created_at TIMESTAMP,
+	FOREIGN KEY (item_id) REFERENCES items (id)
 )

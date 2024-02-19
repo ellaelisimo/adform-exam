@@ -5,11 +5,11 @@ using System.Data;
 
 namespace GabrielesProject.AdformExam.Infrastructure.Repositories;
 
-public class ItemRepository : IItemRepository
+public class ItemsRepository : IItemsRepository
 {
     private readonly IDbConnection _connection;
 
-    public ItemRepository(IDbConnection connection)
+    public ItemsRepository(IDbConnection connection)
     {
         _connection = connection;
     }

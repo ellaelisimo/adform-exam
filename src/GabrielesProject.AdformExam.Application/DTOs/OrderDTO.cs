@@ -1,6 +1,6 @@
-﻿namespace GabrielesProject.AdformExam.Domain.Entities;
+﻿namespace GabrielesProject.AdformExam.Application.DTOs;
 
-public record Order
+public class OrderDTO
 {
     public int Id { get; set; }
 

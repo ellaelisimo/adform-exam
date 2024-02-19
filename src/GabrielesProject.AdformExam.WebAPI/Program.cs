@@ -1,4 +1,5 @@
 using GabrielesProject.AdformExam.Application;
+using GabrielesProject.AdformExam.Application.Services;
 using GabrielesProject.AdformExam.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(dbConnectionString);
 builder.Services.AddHttpClient();
+builder.Services.AddHostedService<CleanupHostedService>();
 
 var app = builder.Build();
 
