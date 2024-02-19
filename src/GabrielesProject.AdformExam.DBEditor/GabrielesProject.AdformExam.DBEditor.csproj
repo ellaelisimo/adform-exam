@@ -4,18 +4,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="dbup-postgresql" Version="5.0.40" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GabrielesProject.AdformExam.WebAPI\GabrielesProject.AdformExam.WebAPI.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="ScriptsSQL\CreateTables\001ClearTables.sql" />
+		<EmbeddedResource Include="ScriptsSQL\CreateTables\002CreateItemsTables.sql" />
+		<EmbeddedResource Include="ScriptsSQL\CreateTables\003CreateOrdersTables.sql" />
+		<EmbeddedResource Include="ScriptsSQL\CreateTables\004CreateOrdersItemsTables.sql" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ScriptsSQL\CreateTables\" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\GabrielesProject.AdformExam.WebAPI\GabrielesProject.AdformExam.WebAPI.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -10,9 +10,4 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
 </Project>
