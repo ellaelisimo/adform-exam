@@ -19,12 +19,12 @@ public class ItemRepository : IItemRepository
         return _connection.QueryFirstOrDefaultAsync<int>("INSERT INTO items (name) VALUES (@name) RETURNING id", item);
     }
 
-    public Task<IEnumerable<Item>> GetItems()
+    public Task<IEnumerable<Item>> GetItemsAsync()
     {
         return _connection.QueryAsync<Item>("SELECT * FROM items");
     }
 
-    public Task<Item?> GetItem(int id)
+    public Task<Item?> GetItemAsync(int id)
     {
         return _connection.QueryFirstOrDefaultAsync<Item>("SELECT * FROM items WHERE id=@id", new { id });
     }

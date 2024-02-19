@@ -2,7 +2,7 @@
 
 namespace GabrielesProject.AdformExam.Application.Interfaces;
 
-public interface IItemRepository
+public interface IItemService
 {
     public Task<IEnumerable<Item>> GetItemsAsync();
 
