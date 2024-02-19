@@ -8,7 +8,6 @@ namespace GabrielesProject.AdformExam.WebAPI.Middlewares
     {
         private readonly RequestDelegate _next;
 
-
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -42,12 +41,14 @@ namespace GabrielesProject.AdformExam.WebAPI.Middlewares
                     case CleanupException:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
+
+                    default: response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        break;
                 }
                 var result = JsonSerializer.Serialize(new { message = error?.Message });
                 await response.WriteAsync(result);
             }
         }
-
     }
 }
 
