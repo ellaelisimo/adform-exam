@@ -17,11 +17,10 @@ public class ItemsService : IItemsService
         _mapper = mapper;
     }
 
-    public Task<int> AddItemAsync(ItemDTO item)
+    public Task<int> AddItemAsync(NewItemDTO item)
     {
         var itemEntity = new Item
         {
-            Id = item.Id,
             Name = item.Name,
         };
         return _itemsRepository.AddItemAsync(itemEntity);

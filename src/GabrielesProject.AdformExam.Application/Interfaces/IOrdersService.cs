@@ -9,11 +9,11 @@ public interface IOrdersService
 
     public Task<OrderDTO?> GetOrderAsync(int id);
 
-    public Task<int> AddOrder(OrderDTO order);
+    public Task<OrderDTO> AddOrder(NewOrderDTO order);
 
     public Task<bool> DeleteAsNotPaidAfterTwoHours();
 
-    public Task<int> UpdateOrder(int id, string orderStatus);
+    public Task<string> UpdateOrderStatus(int id, string orderStatus);
 
     public Task<IEnumerable<OrderDTO>> GetOrdersByUserIdAsync(int userId);
 }

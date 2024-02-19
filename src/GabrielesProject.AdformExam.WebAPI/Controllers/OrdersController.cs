@@ -23,17 +23,16 @@ namespace GabrielesProject.AdformExam.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] OrderDTO order)
+        public async Task<IActionResult> Post([FromBody] NewOrderDTO order)
         {
-            int orderAdd = await _ordersService.AddOrder(order);
+            var orderAdd = await _ordersService.AddOrder(order);
             return Ok(orderAdd);
         }
 
-        [HttpPut("{id}")]
-        [Route("/complete")]
-        public async Task<IActionResult> Update([FromQuery] int id, [FromQuery] string orderStatus)
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> Update(int id, [FromBody] string orderStatus)
         {
-            var order = await _ordersService.UpdateOrder(id, orderStatus);
+            var order = await _ordersService.UpdateOrderStatus(id, orderStatus);
             return Ok(order);
 
         }

@@ -30,6 +30,14 @@ namespace GabrielesProject.AdformExam.WebAPI.Middlewares
                     case NotFoundException:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+
+                    case StatusException:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest; 
+                        break;
+
+                    case NotCreatedException:
+                        response.StatusCode= (int)HttpStatusCode.BadRequest;
+                        break;
                 }
                 var result = JsonSerializer.Serialize(new { message = error?.Message });
                 await response.WriteAsync(result);

@@ -1,6 +1,6 @@
 ﻿namespace GabrielesProject.AdformExam.Application.DTOs;
 
-public class OrderDTO
+public record OrderDTO
 {
     public int Id { get; set; }
 
@@ -11,4 +11,11 @@ public class OrderDTO
     public int ItemId { get; set; }
 
     public DateTime CreatedAt { get; set; }
+}
+
+public record NewOrderDTO
+{
+    public int UserId { get; set; }
+
+    public int ItemId { get; set; }
 }

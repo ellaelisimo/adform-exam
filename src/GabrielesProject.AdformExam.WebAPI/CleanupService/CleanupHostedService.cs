@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GabrielesProject.AdformExam.Application.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,14 @@ namespace GabrielesProject.AdformExam.Application.Services
     public class CleanupHostedService : BackgroundService
     {
         private readonly TimeSpan _interval = TimeSpan.FromSeconds(5);
-        private readonly ILogger<CleanupHostedService> _logger;
 
-        public CleanupHostedService(ILogger<CleanupHostedService> logger)
+        private readonly ILogger<CleanupHostedService> _logger;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
+        public CleanupHostedService(ILogger<CleanupHostedService> logger, IServiceScopeFactory serviceScopeFactory)
         {
             _logger = logger;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -29,9 +33,17 @@ namespace GabrielesProject.AdformExam.Application.Services
 
         private async Task Cleanup()
         {
-            _logger.LogInformation("Cleaning up...");
-            await Task.Delay(TimeSpan.FromSeconds(1)); 
-            _logger.LogInformation("Clean up complete.");
+            using var scope = _serviceScopeFactory.CreateScope();
+            var ordersService = scope.ServiceProvider.GetRequiredService<IOrdersService>();
+
+            try
+            {
+                await ordersService.DeleteAsNotPaidAfterTwoHours();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred during cleanup.");
+            }
         }
     }
 }

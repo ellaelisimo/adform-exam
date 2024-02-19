@@ -17,7 +17,7 @@ public class OrdersRepository : IOrdersRepository
 
     public async Task<int> AddOrder(Order order)
     {
-        return await _connection.QueryFirstOrDefaultAsync<int>("INSERT INTO orders (status, user_id) VALUES (@status, @userId) RETURNING id", order);
+        return await _connection.QueryFirstOrDefaultAsync<int>("INSERT INTO orders (status, user_id, item_id) VALUES (@status, @userId, @itemId) RETURNING id", new { status = order.Status, userId = order.UserId, itemId = order.ItemId });
     }
 
     public async Task<int> DeleteOrderAsync(int id, string orderStatus)

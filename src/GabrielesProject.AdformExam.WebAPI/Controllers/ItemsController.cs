@@ -24,10 +24,10 @@ namespace GabrielesProject.AdformExam.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ItemDTO item)
+        public async Task<IActionResult> Post([FromBody] NewItemDTO item)
         {
-            var itemAdd = await _itemsService.AddItemAsync(item);
-            return Ok(itemAdd);
+            await _itemsService.AddItemAsync(item);
+            return Ok("Item is added!");
         }
     }
 }

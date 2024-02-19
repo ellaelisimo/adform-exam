@@ -18,7 +18,7 @@ public class OrdersService : IOrdersService
         _itemsService = itemsService;
     }
 
-    public async Task<int> AddOrder(OrderDTO order)
+    public async Task<OrderDTO> AddOrder(NewOrderDTO order)
     {
         ExternalUser user = await _usersService.GetUserAsync(order.UserId);
         if (user == null)
@@ -26,13 +26,10 @@ public class OrdersService : IOrdersService
             throw new NotFoundException("User doesn't exist");
         }
 
-        order.UserId = user.Id;
-        order.Status = "created";
-
         Order orderEntity = ConvertToOrderEntity(order);
 
         var orderId = await _ordersRepository.AddOrder(orderEntity);
-        return orderId;
+        return await GetOrderAsync(orderId) ?? throw new NotCreatedException("Couldn't create order");
     }
 
     public async Task<OrderDTO?> GetOrderAsync(int id)
@@ -56,9 +53,15 @@ public class OrdersService : IOrdersService
         return orderDTOs;
     }
 
-    public Task<int> UpdateOrder(int id, string orderStatus)
+    public async Task<string> UpdateOrderStatus(int id, string orderStatus)
     {
-        return _ordersRepository.UpdateOrder(id, orderStatus);
+        var orderUpdated = await _ordersRepository.UpdateOrder(id, orderStatus);
+        if(orderUpdated == 0)
+        {
+            throw new StatusException("Status wasn't updated");
+        }
+        var order = await GetOrderAsync(id) ?? throw new NotFoundException("Order not found");
+        return order.Status ?? throw new StatusException("Status wasn't updated"); 
     }
 
     public async Task<bool> DeleteAsNotPaidAfterTwoHours()
@@ -78,12 +81,13 @@ public class OrdersService : IOrdersService
         return orderDTOs;
     }
 
-    private Order ConvertToOrderEntity(OrderDTO orderDTO)
+    private Order ConvertToOrderEntity(NewOrderDTO orderDTO)
     {
         return new Order
         {
-            Id = orderDTO.Id,
             UserId = orderDTO.UserId,
+            Status = "created",
+            ItemId = orderDTO.ItemId
         };
     }
 
@@ -93,6 +97,7 @@ public class OrdersService : IOrdersService
         {
             Id = order.Id,
             UserId = order.UserId,
+            Status = order.Status
         };
     }
 }

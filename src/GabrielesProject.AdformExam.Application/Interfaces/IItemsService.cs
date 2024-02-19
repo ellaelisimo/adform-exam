@@ -9,5 +9,5 @@ public interface IItemsService
 
     public Task<ItemDTO?> GetItemAsync(int id);
 
-    public Task<int> AddItemAsync(ItemDTO item);
+    public Task<int> AddItemAsync(NewItemDTO item);
 }
