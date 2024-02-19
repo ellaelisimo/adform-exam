@@ -45,9 +45,7 @@ public class OrdersService : IOrdersService
     public async Task<IEnumerable<OrderDTO>> GetOrdersAsync()
     {
         var orderEntities = await _ordersRepository.GetOrdersAsync();
-
         var orderDTOs = orderEntities.Select(ConvertToOrderDTO);
-
         return orderDTOs;
     }
 
@@ -85,7 +83,8 @@ public class OrdersService : IOrdersService
         {
             UserId = orderDTO.UserId,
             Status = "created",
-            ItemId = orderDTO.ItemId
+            ItemId = orderDTO.ItemId,
+            CreatedAt = DateTime.UtcNow
         };
     }
 

@@ -44,7 +44,7 @@ public class OrdersRepository : IOrdersRepository
         var status = "completed";
         var twoHoursAgo = DateTime.UtcNow.AddHours(-2);
         var sql = "SELECT * FROM orders WHERE status <> @status AND created_at > @twoHoursAgo";
-        return await _connection.QueryAsync<Order>(sql, new { twoHoursAgo });
+        return await _connection.QueryAsync<Order>(sql, new { status, twoHoursAgo });
     }
 
     public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(int userId)

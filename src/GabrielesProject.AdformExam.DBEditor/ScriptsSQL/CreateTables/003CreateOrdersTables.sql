@@ -4,6 +4,6 @@
 	status VARCHAR(100) NOT NULL,
 	user_id INT,
 	item_id INT,
-	created_at TIMESTAMP,
+	created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	FOREIGN KEY (item_id) REFERENCES items (id)
 )
