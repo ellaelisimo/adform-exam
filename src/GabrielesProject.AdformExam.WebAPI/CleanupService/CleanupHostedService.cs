@@ -1,9 +1,5 @@
 ﻿using GabrielesProject.AdformExam.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GabrielesProject.AdformExam.Domain.Exceptions;
 
 namespace GabrielesProject.AdformExam.Application.Services
 {
@@ -40,7 +36,7 @@ namespace GabrielesProject.AdformExam.Application.Services
             {
                 await ordersService.DeleteAsNotPaidAfterTwoHours();
             }
-            catch (Exception ex)
+            catch (CleanupException ex)
             {
                 _logger.LogError(ex, "Error occurred during cleanup.");
             }

@@ -34,7 +34,6 @@ namespace GabrielesProject.AdformExam.WebAPI.Controllers
         {
             var order = await _ordersService.UpdateOrderStatus(id, orderStatus);
             return Ok(order);
-
         }
     }
 }
