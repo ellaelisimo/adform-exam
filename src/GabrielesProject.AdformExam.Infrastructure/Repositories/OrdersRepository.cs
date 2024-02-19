@@ -21,7 +21,7 @@ public class OrdersRepository : IOrdersRepository
 
     public async Task<int> DeleteOrderAsync(int id)
     {
-        return await _connection.ExecuteAsync("DELETE FROM order WHERE id=@id", new { id });
+        return await _connection.ExecuteAsync("DELETE FROM orders WHERE id=@id", new { id });
     }
 
     public async Task<Order?> GetOrderAsync(int id)
@@ -43,7 +43,7 @@ public class OrdersRepository : IOrdersRepository
     {
         var status = "completed";
         var twoHoursAgo = DateTime.UtcNow.AddHours(-2);
-        var sql = "SELECT * FROM orders WHERE status <> @status AND created_at > @twoHoursAgo";
+        var sql = "SELECT * FROM orders WHERE status <> @status AND created_at < @twoHoursAgo";
         return await _connection.QueryAsync<Order>(sql, new { status, twoHoursAgo });
     }
 
