@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GabrielesProject.AdformExam.Application.Interfaces;
+using GabrielesProject.AdformExam.Infrastructure.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using System.Data;
 
@@ -10,7 +12,9 @@ public static class DependencyInjection
     {
         Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
         services.AddScoped<IDbConnection>(sp => new NpgsqlConnection(dbConnectionString));
-
+        services.AddTransient<IItemRepository, ItemRepository>();
+        services.AddTransient<IOrderRepository, OrderRepository>();
+        services.AddTransient<IOrdersItemsRepository, OrdersItemsRepository>();
     }
 
 }

@@ -17,8 +17,4 @@
     <ProjectReference Include="..\GabrielesProject.AdformExam.Application\GabrielesProject.AdformExam.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
