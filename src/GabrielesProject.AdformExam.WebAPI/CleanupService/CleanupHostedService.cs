@@ -5,7 +5,7 @@ namespace GabrielesProject.AdformExam.Application.Services
 {
     public class CleanupHostedService : BackgroundService
     {
-        private readonly TimeSpan _interval = TimeSpan.FromSeconds(5);
+        private readonly TimeSpan _interval = TimeSpan.FromSeconds(20);
 
         private readonly ILogger<CleanupHostedService> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;

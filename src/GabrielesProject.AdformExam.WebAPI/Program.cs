@@ -1,6 +1,7 @@
 using GabrielesProject.AdformExam.Application;
 using GabrielesProject.AdformExam.Application.Services;
 using GabrielesProject.AdformExam.Infrastructure;
+using GabrielesProject.AdformExam.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 string? dbConnectionString = builder.Configuration.GetConnectionString("PostgreConnection");
@@ -25,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
